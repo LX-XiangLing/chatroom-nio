@@ -66,16 +66,17 @@ public class ServerHandler {
         //向所有channel广播
         selectionKeys.forEach(selectionKey -> {
             //获取目标的channel
-            SocketChannel ClientChannel = (SocketChannel)selectionKey.channel();
+            Channel ClientChannel = selectionKey.channel();
             //不用给发送消息的客户端发送
-            if (ClientChannel != sendChannel) {
+            if (ClientChannel instanceof SocketChannel && ClientChannel != sendChannel) {
                 try {
                     // 将信息发送到给客户端
-                    ClientChannel.write(Charset.forName("UTF-8").encode(request));
+                    ((SocketChannel) ClientChannel).write(Charset.forName("UTF-8").encode(request));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
+
     }
 }
