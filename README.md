@@ -1,2 +1,3 @@
 基于NIO开发的简单聊天室
 
+启动步骤:在test包下先启动ServerStart服务器端 再启动Client端
