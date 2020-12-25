@@ -28,7 +28,7 @@ public class ServerHandler {
         //将channel注册到selector上，读就绪事件
         socketChannel.register(selector, SelectionKey.OP_READ);
         //客户端连接成功提示信息
-        socketChannel.write(Charset.forName("UTF-8").encode("欢迎进入聊天室(Welcome to the chat room)"));
+        socketChannel.write(Charset.forName("UTF-8").encode("==========欢迎进入聊天室=========="));
     }
 
     /**
