@@ -10,6 +10,7 @@ Java NIO中的所有I/O操作都基于Channel对象
 Channel使用起来跟Stream比较像，可以读取数据到Buffer中，也可以把Buffer中的数据写入
 Stream是单向的,分InputStream和OutputStream 而Channel是双向的，既可用来进行读操作，又可用来进行写操作
 Channel有非阻塞I/O模式         Channel.configureBlocking(false);设置Channel为非阻塞
+
 常见的Channel:
 *FileChannel：读写文件
 *DatagramChannel: UDP协议网络通信
@@ -19,16 +20,19 @@ Channel有非阻塞I/O模式         Channel.configureBlocking(false);设置Chan
 Buffer(缓存区):
 NIO中所使用的缓冲区不是一个简单的byte数组,而是封装过的Buffer类,通过它提供的API,我们可以灵活的操纵数据
 与Java基本类型相对应,NIO提供了多种Buffer类型,如ByteBuffer、CharBuffer、IntBuffer等
+
 重要变量:
 *capacity(总容量)  *position(指针当前位置)  *limit(读/写边界位置)
 在对Buffer进行读/写的过程中,position会往后移动,而 limit 就是 position 移动的边界。
 由此不难想象,在对Buffer进行写入操作时,limit应当设置为capacity的大小，
 而对Buffer进行读取操作时,limit应当设置为数据的实际结束位置。
 (注意:将Buffer数据写入通道是Buffer读取操作,从通道读取数据到Buffer是Buffer写入操作)
+
 写入数据到Buffer
 调用flip()方法
 从Buffer中读取数据调用
 clear()方法或者compact()方法
+
 常用API:
 *flip(): 设置limit为position的值,然后position置为0 对Buffer进行读取操作前调用
 *rewind(): 仅仅将position置0 一般是在重新读取Buffer数据前调用,比如要读取同一个Buffer的数据写入多个通道时会用到 
@@ -39,6 +43,7 @@ Selector(选择器):
 类似gateway，进行对channel的注册与发现
 Selector是一个特殊的组件,用于采集各个通道的状态(或者说事件)我们先将通道注册到选择器,并设置好关心的事件,然后就可以通过调用select()方法,静静地等待事件发生
 Selector是NIO的核心，是select/epoll/poll的外包类，实现了IO多路复用的关键
+
 *OP_ACCEPT —— 接收连接继续事件 表示服务器监听到了客户连接，服务器可以接收这个连接了
 *OP_CONNECT —— 连接就绪事件 表示客户与服务器的连接已经建立成功
 *OP_READ —— 读就绪事件 表示通道中已经有了可读的数据，可以执行读操作了（通道目前有数据，可以进行读操作了）
@@ -49,5 +54,4 @@ NIO擅长1个线程管理多条连接,节约系统资源,但是如果每条连�
 总结就是：连接数多数据量小用NIO,连接数少用I/O
 
 
-================================
-部分内容收集自各个博客 如有侵权联系删除
+================================部分内容收集自各个博客 如有侵权联系删除================================
