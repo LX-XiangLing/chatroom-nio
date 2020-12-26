@@ -2,7 +2,6 @@
 
 启动步骤:在test包下先启动ServerStart服务器端 再启动Client端
 
-最近在学习NIO的相关知识 觉得光看学不会 就试着写了一个简单的聊天室 
 
 NIO的三大核心组件
 Channel(通道):
